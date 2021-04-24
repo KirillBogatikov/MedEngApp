@@ -1,0 +1,1 @@
+UPDATE "product" SET "name" = ? WHERE "id" = ?;

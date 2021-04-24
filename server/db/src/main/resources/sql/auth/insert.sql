@@ -1,0 +1,1 @@
+INSERT INTO "auth" ("id", "login", "password") VALUES (?, ?, ?);
