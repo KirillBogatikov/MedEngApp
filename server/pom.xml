@@ -96,5 +96,6 @@
 		<module>db</module>
 		<module>domain</module>
 		<module>api</module>
+		<module>tools</module>
 	</modules>
 </project>
