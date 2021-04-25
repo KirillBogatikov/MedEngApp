@@ -1,0 +1,1 @@
+SELECT "e"."role" AS "employee_role" FROM "employee" "e" WHERE "e"."auth" = ?;

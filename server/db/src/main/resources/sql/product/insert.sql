@@ -1,1 +1,1 @@
-INSERT INTO "product" ("id", "name") VALUES (?, ?);
+INSERT INTO "product" ("id", "name", "description") VALUES (?, ?, ?);

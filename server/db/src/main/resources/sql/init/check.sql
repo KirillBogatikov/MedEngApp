@@ -3,4 +3,4 @@ SELECT
 FROM
     "information_schema"."tables" as "tables"  
 where
-	"tables"."table_schema" = ?;
+	"tables"."table_schema" = 'public';

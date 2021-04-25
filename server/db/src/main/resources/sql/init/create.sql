@@ -11,7 +11,7 @@ CREATE TABLE "customer" (
 	"email" text,
 	"first_name" text,
 	"last_name" text,
-	"patornymic" text
+	"patronymic" text
 );
 
 CREATE TYPE "employee_role" AS ENUM (
@@ -26,7 +26,8 @@ CREATE TABLE "employee" (
 
 CREATE TABLE "product" (
 	"id" uuid PRIMARY KEY,
-	"name" text NOT NULL
+	"name" text NOT NULL,
+	"description" text
 );
 
 CREATE TYPE "operation_type" AS ENUM (

@@ -1,0 +1,1 @@
+SELECT "e"."id" AS "user_id" FROM "employee" "e" WHERE "e"."auth" = ?;
