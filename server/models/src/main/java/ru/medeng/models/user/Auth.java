@@ -2,13 +2,9 @@ package ru.medeng.models.user;
 
 import java.util.UUID;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 public class Auth {
 	private UUID id;
 	private String login;
-	@JsonIgnore
-	private byte[] passwordHash;
 	private String password;
 	
 	public Auth() {
@@ -29,14 +25,6 @@ public class Auth {
 
 	public void setLogin(String login) {
 		this.login = login;
-	}
-
-	public byte[] getPasswordHash() {
-		return passwordHash;
-	}
-
-	public void setPasswordHash(byte[] password) {
-		this.passwordHash = password;
 	}
 
 	public String getPassword() {

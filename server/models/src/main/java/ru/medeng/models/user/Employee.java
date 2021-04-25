@@ -2,14 +2,10 @@ package ru.medeng.models.user;
 
 import java.util.UUID;
 
-public class Employee {
-	public static enum Role {
-		Operator, Storekeeper;
-	}
-	
+public class Employee {	
 	private UUID id;
 	private Auth auth;
-	private Role role;
+	private AccessLevel role;
 	
 	public UUID getId() {
 		return id;
@@ -27,11 +23,11 @@ public class Employee {
 		this.auth = auth;
 	}
 	
-	public Role getRole() {
+	public AccessLevel getRole() {
 		return role;
 	}
 	
-	public void setRole(Role role) {
+	public void setRole(AccessLevel role) {
 		this.role = role;
 	}
 }

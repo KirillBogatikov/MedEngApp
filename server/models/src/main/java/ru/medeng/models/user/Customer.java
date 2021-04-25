@@ -7,7 +7,9 @@ public class Customer {
 	private String firstName;
 	private String lastName;
 	private String patronymic;
-	private Contact contact;
+	private Auth auth;
+	private String phone;
+	private String email;
 	
 	public UUID getId() {
 		return id;
@@ -41,11 +43,27 @@ public class Customer {
 		this.patronymic = patronymic;
 	}
 	
-	public Contact getContact() {
-		return contact;
+	public Auth getAuth() {
+		return auth;
 	}
-	
-	public void setContact(Contact contact) {
-		this.contact = contact;
+
+	public void setAuth(Auth auth) {
+		this.auth = auth;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }
