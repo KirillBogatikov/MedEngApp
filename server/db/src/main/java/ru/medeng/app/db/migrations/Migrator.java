@@ -16,6 +16,7 @@ public class Migrator {
 		if (repository.query(r -> 1, sql("init", "check")) == null) {
 			System.out.println("Database is raw. Starting migration...");
 			repository.execute(sql("init", "create"));
+			repository.execute(sql("init", "product"));
 		}
 	}
 

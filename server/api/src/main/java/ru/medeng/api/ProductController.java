@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ru.medeng.domain.ProductService;
-import ru.medeng.models.order.Product;
+import ru.medeng.models.Product;
 import ru.medeng.models.user.AccessLevel;
 import ru.medeng.tools.AuthorizedController;
 

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import ru.medeng.app.db.ProductRepository;
-import ru.medeng.models.order.Product;
+import ru.medeng.models.Product;
 import ru.medeng.tools.Result;
 
 public class ProductService {

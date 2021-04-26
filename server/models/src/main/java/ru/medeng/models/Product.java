@@ -1,4 +1,4 @@
-package ru.medeng.models.order;
+package ru.medeng.models;
 
 import java.util.UUID;
 

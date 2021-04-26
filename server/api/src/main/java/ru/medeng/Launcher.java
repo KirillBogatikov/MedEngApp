@@ -7,12 +7,16 @@ import org.springframework.context.annotation.Configuration;
 
 import ru.medeng.app.db.AuthRepository;
 import ru.medeng.app.db.CustomerRepository;
+import ru.medeng.app.db.OperationRepository;
+import ru.medeng.app.db.OrderRepository;
 import ru.medeng.app.db.ProductRepository;
 import ru.medeng.app.db.migrations.Migrator;
 import ru.medeng.configuration.SecurityConfig;
 import ru.medeng.domain.AuthService;
 import ru.medeng.domain.CustomerService;
+import ru.medeng.domain.OrderService;
 import ru.medeng.domain.ProductService;
+import ru.medeng.domain.ShipmentService;
 import ru.medeng.tools.Hash;
 import ru.medeng.tools.Resources;
 import springfox.documentation.spi.DocumentationType;
@@ -28,6 +32,8 @@ public class Launcher {
 	private AuthService auth;
 	private ProductService product;
 	private CustomerService customer;
+	private ShipmentService shipment;
+	private OrderService order;
 	
 	public Launcher() {
 		
@@ -57,6 +63,22 @@ public class Launcher {
 		}
 		return customer;
 	}
+	
+	@Bean
+	public ShipmentService shipment() {
+		if (shipment == null) {
+			shipment = new ShipmentService(new OperationRepository(jdbcURL));
+		}
+		return shipment;
+	}
+	
+	@Bean
+	public OrderService order() {
+		if (order == null) {
+			order = new OrderService(new OrderRepository(jdbcURL), new OperationRepository(jdbcURL), new ProductRepository(jdbcURL));
+		}
+		return order;
+	}
 
 	@Bean
 	public Docket api() {
@@ -64,7 +86,7 @@ public class Launcher {
 				.paths((each) -> each.startsWith("/api/")).build();
 	}
 
-	public static void main(String... args) {		
+	public static void main(String... args) {
 		Resources.init(Launcher.class);
 		
 		var security = new SecurityConfig();

@@ -1,13 +1,12 @@
 SELECT 
-	"c"."id" AS "id", 
-	"c"."first_name" AS "first_name",
-	"c"."last_name" AS "last_name",
-	"c"."patronymic" AS "patronymic",
-	"c"."phone" AS "phone",
-	"c"."email" AS "email", 
+	"c"."id" AS "customer_id", 
+	"c"."first_name" AS "customer_first_name",
+	"c"."last_name" AS "customer_last_name",
+	"c"."patronymic" AS "customer_patronymic",
+	"c"."phone" AS "customer_phone",
+	"c"."email" AS "customer_email", 
 	"a"."id" AS "auth_id",
-	"a"."login" AS "auth_login"
-FROM "consumer" AS "c"   
-JOIN "auth" "a" ON "a"."id" = "c"."auth" 
-WHERE "c"."first_name" ~ ? OR "c"."last_name" ~ ? OR "c"."patronymic" ~ ? OR
-	  "a"."login" ~ ? OR "c"."phone" ~ ? OR "c"."email" ~ ?
+	"a"."login" AS "auth_login" 
+FROM "customer" AS "c" 
+JOIN "auth" "a" ON "a"."id" = "c"."auth"  
+WHERE "c"."first_name" ~ ? OR "c"."last_name" ~ ? OR "c"."patronymic" ~ ? OR "c"."phone" ~ ? OR "c"."email" ~ ? OR "a"."login" ~ ?

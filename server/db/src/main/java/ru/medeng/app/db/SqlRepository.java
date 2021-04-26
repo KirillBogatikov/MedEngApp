@@ -32,6 +32,18 @@ public class SqlRepository {
 		return DriverManager.getConnection(url);
 	}
 	
+	public <T> T getResultValue(ResultSet r, String column, Class<T> type) throws SQLException {
+		var md = r.getMetaData();
+		
+		for (int i = 0; i < md.getColumnCount(); i++) {
+			if (md.getColumnName(i).equals(column)) {
+				return r.getObject(i, type);
+			}
+		}
+		
+		return null;
+	}
+	
 	public <T> T query(Mapper<T> map, String sql, Object... args) throws SQLException {
 		try(var conn = connect();
 			var stat = conn.prepareStatement(sql)) {

@@ -11,17 +11,16 @@ import ru.medeng.models.user.Customer;
 
 public class CustomerRepository extends SqlRepository {
 	private static final String SQL_DIR = "customer";
-	private static Mapper<Customer> customer = r -> {
+	public static Mapper<Customer> customer = r -> {
 		var c = new Customer();
 		
 		c.setAuth(AuthRepository.auth.apply(r));
-		
-		c.setId(r.getObject("id", UUID.class));
-		c.setFirstName(r.getString("first_name"));
-		c.setLastName(r.getString("last_name"));
-		c.setPatronymic(r.getString("patronymic"));
-		c.setPhone(r.getString("phone"));
-		c.setEmail(r.getString("email"));
+		c.setId(r.getObject("customer_id", UUID.class));
+		c.setFirstName(r.getString("customer_first_name"));
+		c.setLastName(r.getString("customer_last_name"));
+		c.setPatronymic(r.getString("customer_patronymic"));
+		c.setPhone(r.getString("customer_phone"));
+		c.setEmail(r.getString("customer_email"));
 		
 		return c;
 	};

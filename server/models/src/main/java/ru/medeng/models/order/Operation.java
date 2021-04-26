@@ -4,6 +4,9 @@ import java.util.Date;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import ru.medeng.models.Product;
 
 public class Operation {
 	public static enum Type {
@@ -13,6 +16,7 @@ public class Operation {
 	private UUID id;
 	private Product product;
 	private int count;
+	@JsonProperty(required = false)
 	private Type type;	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date date;

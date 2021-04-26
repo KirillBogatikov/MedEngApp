@@ -5,12 +5,13 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.UUID;
 
-import ru.medeng.models.order.Product;
+import ru.medeng.models.Product;
+
 import static ru.medeng.tools.Resources.sql;
 
 public class ProductRepository extends SqlRepository {
 	private static final String SQL_DIR = "product";
-	private static final Mapper<Product> product = r -> {
+	public static final Mapper<Product> product = r -> {
 		var p = new Product();
 		
 		p.setId(r.getObject("product_id", UUID.class));
@@ -26,6 +27,10 @@ public class ProductRepository extends SqlRepository {
 	
 	public boolean has(UUID id) throws SQLException, IOException {
 		return query(r -> 1, sql(SQL_DIR, "has"), id) != null;
+	}
+	
+	public Product get(UUID id) throws SQLException, IOException {
+		return query(product, sql(SQL_DIR, "get"), id);
 	}
 
 	public List<Product> search(String query) throws SQLException, IOException {
