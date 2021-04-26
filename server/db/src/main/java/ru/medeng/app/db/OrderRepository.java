@@ -93,6 +93,6 @@ public class OrderRepository extends SqlRepository {
 
 	public void insertStatus(StatusInfo status) throws SQLException, IOException {
 		status.setDate(new Date(System.currentTimeMillis()));
-		execute(sql("order/status", "insert"), status.getId(), status.getOrderId(), status.getStatus().toString(), status.getDate());
+		execute(sql("order/status", "insert").formatted(status.getStatus()), status.getId(), status.getOrderId(), status.getDate());
 	}
 }

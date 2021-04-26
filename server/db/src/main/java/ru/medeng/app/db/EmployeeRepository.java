@@ -39,7 +39,7 @@ public class EmployeeRepository extends SqlRepository {
 
 	public void insert(Employee e) throws SQLException, IOException {
 		var a = e.getAuth();
-		execute(sql("employee", "insert"), a.getId(), a.getLogin(), a.getPassword(), e.getId(), a.getId(), e.getRole().toString());
+		execute(sql("employee", "insert").formatted(e.getRole()), a.getId(), a.getLogin(), a.getPassword(), e.getId(), a.getId());
 	}
 	
 	public boolean update(Employee e) throws SQLException, IOException {
@@ -48,7 +48,7 @@ public class EmployeeRepository extends SqlRepository {
 		}
 		
 		var a = e.getAuth();
-		execute(sql("employee", "update"), a.getLogin(), a.getPassword(), a.getId(), e.getRole().toString(), e.getId());
+		execute(sql("employee", "update").formatted(e.getRole()), a.getLogin(), a.getPassword(), a.getId(), e.getId());
 		return true;
 	}
 

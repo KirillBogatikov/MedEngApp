@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import ru.medeng.mobile.MainActivity;
 import ru.medeng.mobile.R;
 import ru.medeng.mobile.api.Api;
 import ru.medeng.models.user.Auth;
@@ -47,6 +48,11 @@ public class AccountFragment extends Fragment {
                 case 200: Toast.makeText(login.getContext(), "Данные сохранены", Toast.LENGTH_LONG).show(); break;
                 default: Toast.makeText(login.getContext(), "Произошла непредвиденная ошибка. Попробуйте позже", Toast.LENGTH_LONG).show(); break;
             }
+        });
+
+        root.findViewById(R.id.logout).setOnClickListener(v -> {
+            Api.getInstance().logout();
+            MainActivity.navigationUpdateListener.invalidateNavigationBar();
         });
 
         customer = Api.getInstance().getCustomer();

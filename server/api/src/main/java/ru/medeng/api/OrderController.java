@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ru.medeng.domain.OrderService;
-import ru.medeng.models.client.ClientOrder;
+import ru.medeng.models.order.Order;
 import ru.medeng.models.order.Status;
 import ru.medeng.models.user.AccessLevel;
 import ru.medeng.tools.AuthorizedController;
@@ -64,7 +64,7 @@ public class OrderController extends AuthorizedController {
 	}
 
 	@PostMapping
-	public ResponseEntity<?> add(@RequestHeader("Authorization") String tokenHeader, @RequestBody ClientOrder order) {
+	public ResponseEntity<?> add(@RequestHeader("Authorization") String tokenHeader, @RequestBody Order order) {
 		var status = auth(tokenHeader, AccessLevel.Customer);
 		if (status != null) {
 			return status;

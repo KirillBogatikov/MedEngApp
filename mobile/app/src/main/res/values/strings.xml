@@ -40,4 +40,6 @@
     <string name="login_action">Войти</string>
     <string name="signup_label">Зарегистрироваться</string>
     <string name="list_orders_title">Все заказы</string>
+    <string name="logout_label">Выйти</string>
+    <string name="customers_title">Клиенты</string>
 </resources>

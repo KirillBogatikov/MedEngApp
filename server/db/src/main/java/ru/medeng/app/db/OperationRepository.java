@@ -38,7 +38,7 @@ public class OperationRepository extends SqlRepository {
 		o.setDate(new Date(System.currentTimeMillis()));
 		var p = o.getProduct();
 		if (hasProduct(p.getId())) {
-			execute(sql("operation", "insert"), o.getId(), p.getId(), o.getType().toString(), o.getCount(), o.getDate());
+			execute(sql("operation", "insert").formatted(o.getType()), o.getId(), p.getId(), o.getCount(), o.getDate());
 			return true;
 		}
 		

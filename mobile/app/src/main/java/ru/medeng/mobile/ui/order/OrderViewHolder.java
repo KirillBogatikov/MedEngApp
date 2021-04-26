@@ -37,6 +37,6 @@ public class OrderViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void setItems(List<Item> items) {
-        this.items.setAdapter(new OrderItemAdapter(items));
+        this.items.setAdapter(new OrderItemAdapter(items, null));
     }
 }

@@ -78,7 +78,7 @@ public class Launcher {
 	@Bean
 	public OrderService order() {
 		if (order == null) {
-			order = new OrderService(new OrderRepository(jdbcURL), new OperationRepository(jdbcURL), new ProductRepository(jdbcURL));
+			order = new OrderService(new OrderRepository(jdbcURL), new OperationRepository(jdbcURL));
 		}
 		return order;
 	}

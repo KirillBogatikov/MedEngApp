@@ -43,11 +43,15 @@ public class MainActivity extends AppCompatActivity {
             switch(Api.getInstance().getAccessLevel()) {
                 case Guest:
                     navController.setGraph(R.navigation.guest_navigation);
+                    navView.getMenu().getItem(1).setTitle(R.string.account_title);
                     break;
                 case Customer:
                     navController.setGraph(R.navigation.customer_navigation);
+                    navView.getMenu().getItem(1).setTitle(R.string.account_title);
                     break;
                 case Operator:
+                    navController.setGraph(R.navigation.operator_navigation);
+                    navView.getMenu().getItem(1).setTitle(R.string.customers_title);
 
             }
             navView.invalidate();

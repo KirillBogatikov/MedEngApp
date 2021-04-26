@@ -6,10 +6,7 @@ import java.util.UUID;
 
 import ru.medeng.app.db.OperationRepository;
 import ru.medeng.app.db.OrderRepository;
-import ru.medeng.app.db.ProductRepository;
-import ru.medeng.models.client.ClientItem;
 import ru.medeng.models.order.Item;
-import ru.medeng.models.order.Operation;
 import ru.medeng.models.order.Operation.Type;
 import ru.medeng.models.order.Order;
 import ru.medeng.models.order.Status;
@@ -19,12 +16,10 @@ import ru.medeng.tools.Result;
 public class OrderService {
 	private OrderRepository orders;
 	private OperationRepository operations;
-	private ProductRepository products;
 	
-	public OrderService(OrderRepository orders, OperationRepository operations, ProductRepository products) {
+	public OrderService(OrderRepository orders, OperationRepository operations) {
 		this.orders = orders;
 		this.operations = operations;
-		this.products = products;
 	}
 
 	public Result<List<Order>> list(UUID userId, String orderStatus) {
@@ -45,7 +40,7 @@ public class OrderService {
 		}
 	}
 
-	public Result<Order> add(UUID customerId, List<ClientItem> clientItems) {
+	public Result<Order> add(UUID customerId, List<Item> orderItems) {
 		try {
 			var order = new Order();
 			order.setId(UUID.randomUUID());
@@ -55,25 +50,17 @@ public class OrderService {
 				return Result.notFound();
 			}
 			
-			var items = new ArrayList<Item>();
-			for (ClientItem clientItem : clientItems) {
-				var o = new Operation();
+			for (Item item : orderItems) {
+				var o = item.getBooking();
 				
 				o.setId(UUID.randomUUID());
-				o.setProduct(products.get(clientItem.getProduct()));
-				o.setCount(clientItem.getCount());
 				o.setType(Type.Booking);
 				
 				operations.insert(o);
-
-				var item = new Item();
-				item.setId(UUID.randomUUID());
-				item.setBooking(o);
-				items.add(item);
 				
-				orders.insertItem(order.getId(), item);				
+				item.setId(UUID.randomUUID());
+				orders.insertItem(order.getId(), item);
 			}
-			order.setItems(items);
 			
 			var history = new ArrayList<StatusInfo>();
 			var status = new StatusInfo();

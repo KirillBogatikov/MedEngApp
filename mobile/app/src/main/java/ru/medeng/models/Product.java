@@ -1,5 +1,6 @@
 package ru.medeng.models;
 
+import java.util.Objects;
 import java.util.UUID;
 
 public class Product {
@@ -29,5 +30,18 @@ public class Product {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}	
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Product product = (Product) o;
+		return Objects.equals(id, product.id);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
 }

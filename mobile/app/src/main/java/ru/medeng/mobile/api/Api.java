@@ -10,13 +10,13 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
-import java.net.ConnectException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
-import java.util.logging.Level;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -25,6 +25,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import ru.medeng.models.LevelHolder;
 import ru.medeng.models.Product;
 import ru.medeng.models.TokenHolder;
+import ru.medeng.models.order.Item;
+import ru.medeng.models.order.Operation;
 import ru.medeng.models.order.Order;
 import ru.medeng.models.user.AccessLevel;
 import ru.medeng.models.user.Customer;
@@ -46,6 +48,7 @@ public class Api {
 
     private String token;
     private AccessLevel level;
+    private Map<Product, Integer> currentOrderItems;
 
     private Retrofit retrofit;
     private CustomerService customers;
@@ -105,14 +108,6 @@ public class Api {
         });
     }
 
-    public CustomerService getCustomers() {
-        return customers;
-    }
-
-    public ProductService getProducts() {
-        return products;
-    }
-
     public boolean login(CharSequence login, CharSequence password) {
         try {
             token = thread.await(() -> {
@@ -130,6 +125,12 @@ public class Api {
             Log.e(TAG, "Failed to login", e);
             return false;
         }
+    }
+
+    public void logout() {
+        token = null;
+        level = null;
+        currentOrderItems = null;
     }
 
     public int signup(Customer customer) {
@@ -240,5 +241,60 @@ public class Api {
 
     public AccessLevel getCachedAccessLevel() {
         return level;
+    }
+
+    public void setOrderMap(Map<Product, Integer> currentOrderItems) {
+        this.currentOrderItems = currentOrderItems;
+    }
+
+    public Map<Product, Integer> getOrderMap() {
+        return currentOrderItems;
+    }
+
+    public List<Item> getOrderItems() {
+        List<Item> items = new ArrayList<>();
+
+        for (Map.Entry<Product, Integer> e : currentOrderItems.entrySet()) {
+            Item item = new Item();
+            Operation o = new Operation();
+            o.setProduct(e.getKey());
+            o.setCount(e.getValue());
+            item.setBooking(o);
+            items.add(item);
+        }
+
+        return items;
+    }
+
+    public int createOrder() {
+        return thread.await(() -> {
+           try {
+               Order order = new Order();
+
+               List<Item> items = new ArrayList<>();
+               for (Item oldItem : getOrderItems()) {
+                   Operation oldBooking = oldItem.getBooking();
+                   Product oldProduct = oldBooking.getProduct();
+
+                   Item newItem = new Item();
+                   Operation newBooking = new Operation();
+                   Product newProduct = new Product();
+
+                   newProduct.setId(oldProduct.getId());
+                   newBooking.setProduct(newProduct);
+                   newBooking.setCount(oldBooking.getCount());
+                   newItem.setBooking(newBooking);
+                   items.add(newItem);
+               }
+               order.setItems(items);
+
+               Call<Void> call = orders.create(token, order);
+               Response<Void> resp = call.execute();
+               return resp.code();
+           } catch(Exception e) {
+               Log.d(TAG, "Failed to create order", e);
+               return 500;
+           }
+        });
     }
 }

@@ -28,6 +28,7 @@ public class OrderItemViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void setListener(CountListener listener) {
+        this.count.setEnabled(true);
         this.count.addTextChangedListener(new TextWatcher() {
 
             @Override
