@@ -28,7 +28,9 @@ public class AuthorizedController extends MedEngController {
 			return unauthorized();
 		}
 		
-		var authData = result.getData();
+		var authData = result.getData();		
+		this.token = authData.getToken();
+		this.accessLevel = authData.getAccessLevel();
 		
 		if (allowed.length > 0) {
 			for (var l : allowed) {
@@ -39,9 +41,6 @@ public class AuthorizedController extends MedEngController {
 
 			return forbidden();
 		}
-		
-		this.token = authData.getToken();
-		this.accessLevel = authData.getAccessLevel();
 		
 		return null;
 	}

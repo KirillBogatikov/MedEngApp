@@ -4,23 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.OrderListFragment">
+    tools:context=".ui.order.OrderListFragment">
 
     <LinearLayout
         android:id="@+id/current_order"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="25dp">
+        android:padding="@dimen/order_root_padding">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/current_order_label"
-            android:textSize="@dimen/current_order_title_text"/>
+            android:textSize="@dimen/order_title_text"/>
 
         <Spinner
             android:id="@+id/current_order_status"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:entries="@array/order_status"/>
@@ -32,13 +33,28 @@
 
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/orders"
-        android:layout_below="@id/current_order"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_below="@id/current_order"
+        android:orientation="vertical"
+        android:padding="@dimen/order_root_padding">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/list_orders_title"
+            android:textSize="@dimen/order_title_text"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/orders"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"

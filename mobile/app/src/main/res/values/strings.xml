@@ -39,4 +39,5 @@
     <string name="auth_title">Вход и регистрация</string>
     <string name="login_action">Войти</string>
     <string name="signup_label">Зарегистрироваться</string>
+    <string name="list_orders_title">Все заказы</string>
 </resources>

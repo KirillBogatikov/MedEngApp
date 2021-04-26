@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/navigation_list"
-        android:name="ru.medeng.mobile.ui.OrderListFragment"
+        android:name="ru.medeng.mobile.ui.order.OrderListFragment"
         android:label="@string/orders_title"
         tools:layout="@layout/fragment_order_list" />
 </navigation>

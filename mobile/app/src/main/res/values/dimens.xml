@@ -8,7 +8,7 @@
     
     <dimen name="fab_margin">30dp</dimen>
     
-    <dimen name="current_order_title_text">16sp</dimen>
+    <dimen name="order_title_text">16sp</dimen>
 
     <dimen name="shipment_padding_vertical">15dp</dimen>
     <dimen name="shipment_padding_horizontal">35dp</dimen>
@@ -17,4 +17,5 @@
     <dimen name="edit_text_hint_text">12sp</dimen>
     <dimen name="edit_text_value">20sp</dimen>
     <dimen name="edit_text_divider">15dp</dimen>
+    <dimen name="order_root_padding">25dp</dimen>
 </resources>

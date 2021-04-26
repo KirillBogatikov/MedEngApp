@@ -17,6 +17,7 @@ import ru.medeng.models.user.Customer;
 
 public class AccountFragment extends Fragment {
     private TextView firstName, lastName, patronymic, phone, email, login, password;
+    private Customer customer;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -31,24 +32,24 @@ public class AccountFragment extends Fragment {
         password = root.findViewById(R.id.password);
 
         root.findViewById(R.id.save).setOnClickListener(v -> {
-            Customer customer = new Customer();
             customer.setFirstName(firstName.getText());
             customer.setLastName(lastName.getText());
             customer.setPatronymic(patronymic.getText());
             customer.setPhone(phone.getText());
             customer.setEmail(email.getText());
 
-            Auth auth = new Auth();
+            Auth auth = customer.getAuth();
             auth.setLogin(login.getText());
             auth.setPassword(password.getText());
 
-            int status = Api.getInstance().signup(customer);
+            int status = Api.getInstance().saveCustomer(customer);
             switch (status) {
-                case 200: Toast.makeText(login.getContext(), "Пользователь не найден!", Toast.LENGTH_LONG).show();
+                case 200: Toast.makeText(login.getContext(), "Данные сохранены", Toast.LENGTH_LONG).show(); break;
+                default: Toast.makeText(login.getContext(), "Произошла непредвиденная ошибка. Попробуйте позже", Toast.LENGTH_LONG).show(); break;
             }
         });
 
-        Customer customer = Api.getInstance().getCustomer();
+        customer = Api.getInstance().getCustomer();
         if (customer != null) {
             firstName.setText(customer.getFirstName());
             lastName.setText(customer.getLastName());

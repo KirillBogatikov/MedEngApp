@@ -25,6 +25,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import ru.medeng.models.LevelHolder;
 import ru.medeng.models.Product;
 import ru.medeng.models.TokenHolder;
+import ru.medeng.models.order.Order;
 import ru.medeng.models.user.AccessLevel;
 import ru.medeng.models.user.Customer;
 
@@ -50,6 +51,7 @@ public class Api {
     private CustomerService customers;
     private AuthService auth;
     private ProductService products;
+    private OrderService orders;
 
     public Api() {
         Gson gson = new GsonBuilder()
@@ -85,6 +87,7 @@ public class Api {
         customers = retrofit.create(CustomerService.class);
         auth = retrofit.create(AuthService.class);
         products = retrofit.create(ProductService.class);
+        orders = retrofit.create(OrderService.class);
 
         thread = new NetworkThread();
     }
@@ -159,6 +162,18 @@ public class Api {
         });
     }
 
+    public int saveCustomer(Customer customer) {
+        return thread.await(() -> {
+            try {
+                Call<Void> call = customers.save(token, customer);
+                Response<Void> resp = call.execute();
+                return resp.code();
+            } catch (Exception e) {
+                return 500;
+            }
+        });
+    }
+
     public List<Product> listProducts() {
         return thread.await(() -> {
             try {
@@ -171,6 +186,24 @@ public class Api {
                 Log.d(TAG, "Unexpected status: " + resp.code());
             } catch (Exception e) {
                 Log.d(TAG, "listProducts", e);
+            }
+
+            return Collections.emptyList();
+        });
+    }
+
+    public List<Order> listOrders() {
+        return thread.await(() -> {
+            try {
+                Call<List<Order>> call = orders.list(token);
+                Response<List<Order>> resp = call.execute();
+                if (resp.code() == 200) {
+                    return resp.body();
+                }
+
+                Log.d(TAG, "Unexpected status: " + resp.code());
+            } catch (Exception e) {
+                Log.d(TAG, "Failed to list orders", e);
             }
 
             return Collections.emptyList();
