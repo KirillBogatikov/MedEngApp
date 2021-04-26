@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.OrderListFragment">
+
+    <LinearLayout
+        android:id="@+id/current_order"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="25dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/current_order_label"
+            android:textSize="@dimen/current_order_title_text"/>
+
+        <Spinner
+            android:id="@+id/current_order_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/order_status"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/current_order_items"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/orders"
+        android:layout_below="@id/current_order"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="@dimen/fab_margin"
+        android:layout_marginBottom="@dimen/fab_margin"
+        android:src="@drawable/done"
+        android:contentDescription="@string/save_label" />
+
+</RelativeLayout>

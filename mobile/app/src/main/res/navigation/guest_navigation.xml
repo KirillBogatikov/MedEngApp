@@ -13,13 +13,8 @@
 
     <fragment
         android:id="@+id/navigation_account"
-        android:name="ru.medeng.app.mobile.ui.AccountFragment"
-        android:label="@string/account_title"
-        tools:layout="@layout/fragment_account" />
+        android:name="ru.medeng.app.mobile.ui.auth.AuthFragment"
+        android:label="@string/auth_title"
+        tools:layout="@layout/fragment_auth" />
 
-    <fragment
-        android:id="@+id/navigation_list"
-        android:name="ru.medeng.app.mobile.ui.OrderListFragment"
-        android:label="@string/orders_title"
-        tools:layout="@layout/fragment_order_list" />
 </navigation>
