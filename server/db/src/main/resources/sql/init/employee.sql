@@ -1,0 +1,12 @@
+INSERT INTO "auth" ("id", "login", "password") VALUES ('3d54d559-c473-46ec-a518-1a9d2cc78ba2', 'mitrofan', 'bb5e9db7ec15ae69dd535336f68be341fc0933f1394ffe07a813b64e3e9634bd');
+INSERT INTO "auth" ("id", "login", "password") VALUES ('aa79d0c9-3c5e-4460-9f73-9c03a9a91c39', 'fadeev.d', '79e9470b6b59a91e36bb30fca2c926355addc04a679e9720a8a08045579a14e7');
+INSERT INTO "auth" ("id", "login", "password") VALUES ('9e1a354d-5204-4236-a704-02c2a5e554cd', 'loginov_kliment', '9be0140b7cca3b076ff6355980fabcafdab72d74684e3283077cfc91e2715ce1');
+INSERT INTO "auth" ("id", "login", "password") VALUES ('9c3e7adb-54f0-4f30-b0a3-bb12c8379f62', 'lavretii_voron', '82ca976ff597fbec89202e955f538f4fef6c45cbae529d104cbae28826b64fb5');
+INSERT INTO "auth" ("id", "login", "password") VALUES ('5300b650-92c7-4290-b2f5-5f12fb32885b', 'soroka', 'c26187b2156de9e5282ac3ee94204e1f3add2dc3b32063be0213437fc15ed376');
+INSERT INTO "auth" ("id", "login", "password") VALUES ('5eb7573d-3eaf-43c0-8c81-15539d780202', 'larionov', 'e7e080f7f7ff746f9554849486f441dc802c0165fd10659ec5fd6e3052f5d8d7');
+INSERT INTO "employee" ("id", "auth", "role") VALUES ('95a6c9db-1b93-4955-8f99-e9f74bae13ac', '3d54d559-c473-46ec-a518-1a9d2cc78ba2', 'Operator');
+INSERT INTO "employee" ("id", "auth", "role") VALUES ('0251f5e9-edad-44c8-8a9c-77900fdd72b6', 'aa79d0c9-3c5e-4460-9f73-9c03a9a91c39', 'Operator');
+INSERT INTO "employee" ("id", "auth", "role") VALUES ('06289f81-5a1f-4bf4-b71b-04616f4d97e3', '9e1a354d-5204-4236-a704-02c2a5e554cd', 'Operator');
+INSERT INTO "employee" ("id", "auth", "role") VALUES ('c6164451-edd6-448a-8403-426f4f060dbe', '9c3e7adb-54f0-4f30-b0a3-bb12c8379f62', 'Storekeeper');
+INSERT INTO "employee" ("id", "auth", "role") VALUES ('350c784c-4d94-4f70-837d-0453f5a100e7', '5300b650-92c7-4290-b2f5-5f12fb32885b', 'Storekeeper');
+INSERT INTO "employee" ("id", "auth", "role") VALUES ('21dbe000-0aa2-4121-a959-7c3ed60bce95', '5eb7573d-3eaf-43c0-8c81-15539d780202', 'Storekeeper');

@@ -68,7 +68,7 @@ public class CustomerController extends AuthorizedController {
 	}
 
 	@GetMapping
-	public ResponseEntity<?> search(@RequestHeader("Authorization") String tokenHeader, @RequestParam String query) {
+	public ResponseEntity<?> search(@RequestHeader("Authorization") String tokenHeader, @RequestParam(required=false) String query) {
 		var status = auth(tokenHeader, AccessLevel.Operator);
 		if (status != null) {
 			return status;

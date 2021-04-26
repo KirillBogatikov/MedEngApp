@@ -24,7 +24,7 @@ public class EmployeeController extends AuthorizedController {
 	private EmployeeService service;
 	
 	@GetMapping
-	public ResponseEntity<?> list(@RequestHeader("Authorization") String tokenHeader, @RequestParam String query) {
+	public ResponseEntity<?> list(@RequestHeader("Authorization") String tokenHeader, @RequestParam(required=false) String query) {
 		var status = auth(tokenHeader, AccessLevel.Operator);
 		if (status != null) {
 			return status;

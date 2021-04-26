@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 import ru.medeng.app.db.AuthRepository;
 import ru.medeng.app.db.CustomerRepository;
+import ru.medeng.app.db.EmployeeRepository;
 import ru.medeng.app.db.OperationRepository;
 import ru.medeng.app.db.OrderRepository;
 import ru.medeng.app.db.ProductRepository;
@@ -14,6 +15,7 @@ import ru.medeng.app.db.migrations.Migrator;
 import ru.medeng.configuration.SecurityConfig;
 import ru.medeng.domain.AuthService;
 import ru.medeng.domain.CustomerService;
+import ru.medeng.domain.EmployeeService;
 import ru.medeng.domain.OrderService;
 import ru.medeng.domain.ProductService;
 import ru.medeng.domain.ShipmentService;
@@ -34,6 +36,7 @@ public class Launcher {
 	private CustomerService customer;
 	private ShipmentService shipment;
 	private OrderService order;
+	private EmployeeService employee;
 	
 	public Launcher() {
 		
@@ -79,6 +82,14 @@ public class Launcher {
 		}
 		return order;
 	}
+	
+	@Bean
+	public EmployeeService employee() {
+		if (employee == null) {
+			employee = new EmployeeService(new EmployeeRepository(jdbcURL));
+		}
+		return employee;
+	}
 
 	@Bean
 	public Docket api() {
@@ -103,6 +114,13 @@ public class Launcher {
 		var thread = new Thread(() -> {
 			try {
 				var migrator = new Migrator(Launcher.jdbcURL);
+				var needImport = migrator.init();
+				if (needImport) {
+					migrator.importProducts();
+					migrator.importCustomers();
+					migrator.importEmployee();
+					migrator.importOrders();
+				}
 			} catch(Exception e) {
 				e.printStackTrace();
 			}			

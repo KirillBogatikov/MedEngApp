@@ -16,13 +16,17 @@ public class EmployeeRepository extends SqlRepository {
 		
 		e.setId(r.getObject("employee_id", UUID.class));
 		e.setAuth(AuthRepository.auth.apply(r));
-		e.setRole(AccessLevel.valueOf(r.getString("role")));
+		e.setRole(AccessLevel.valueOf(r.getString("employee_role")));
 		
 		return e;
 	};
 	
 	public EmployeeRepository(String url) {
 		super(url);
+	}
+	
+	public String getPassword(UUID id) throws SQLException, IOException {
+		return query(r -> r.getString("password"), sql("employee", "get_password"), id);
 	}
 
 	public boolean has(UUID id) throws SQLException, IOException {
@@ -35,7 +39,7 @@ public class EmployeeRepository extends SqlRepository {
 
 	public void insert(Employee e) throws SQLException, IOException {
 		var a = e.getAuth();
-		execute(sql("employee", "insert"), e.getId(), a.getLogin(), a.getPassword(), e.getRole().toString());
+		execute(sql("employee", "insert"), a.getId(), a.getLogin(), a.getPassword(), e.getId(), a.getId(), e.getRole().toString());
 	}
 	
 	public boolean update(Employee e) throws SQLException, IOException {

@@ -56,7 +56,7 @@ public class CustomerRepository extends SqlRepository {
 	}
 
 	public List<Customer> search(String query) throws SQLException, IOException {
-		return queryList(customer, sql(SQL_DIR, "search"), query);
+		return queryList(customer, sql(SQL_DIR, "search"), query, query, query, query, query, query);
 	}
 
 	public boolean delete(UUID id) throws SQLException, IOException {

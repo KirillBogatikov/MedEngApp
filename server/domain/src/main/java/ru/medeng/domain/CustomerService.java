@@ -60,6 +60,12 @@ public class CustomerService {
 
 	public Result<List<Customer>> search(String query) {
 		try {
+			if (query == null || query.isEmpty()) {
+				query = ".*";
+			} else {
+				query = ".*%s.*".formatted(query);
+			}
+			
 			return Result.ok(repo.search(query));
 		} catch(Exception e) {
 			e.printStackTrace();
