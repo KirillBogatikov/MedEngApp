@@ -12,42 +12,43 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import ru.medeng.domain.ProductService;
-import ru.medeng.models.Product;
+import ru.medeng.domain.EmployeeService;
 import ru.medeng.models.user.AccessLevel;
+import ru.medeng.models.user.Employee;
 import ru.medeng.tools.AuthorizedController;
 
 @RestController
-@RequestMapping("/api/product")
-public class ProductController extends AuthorizedController {
+@RequestMapping("/api/employee")
+public class EmployeeController extends AuthorizedController {
 	@Autowired
-	private ProductService service;
+	private EmployeeService service;
 	
 	@GetMapping
-	public ResponseEntity<?> search(@RequestParam(required=false) String query) {
-		var list = service.search(query);
-		if (list.hasError()) {
-			return error();
-		}
-		
-		return ok(list.getData());
-	}
-	
-	@PutMapping
-	public ResponseEntity<?> save(@RequestHeader("Authorization") String tokenHeader, @RequestBody Product product) {
-		var status = auth(tokenHeader, AccessLevel.Storekeeper);
+	public ResponseEntity<?> list(@RequestHeader("Authorization") String tokenHeader, @RequestParam String query) {
+		var status = auth(tokenHeader, AccessLevel.Operator);
 		if (status != null) {
 			return status;
 		}
 		
-		var result = service.save(product);
+		var result = service.list(query);
+		if (result.hasError()) {
+			return error();
+		}
+		
+		return ok(result.getData());
+	}
+
+	@PutMapping
+	public ResponseEntity<?> save(@RequestHeader("Authorization") String tokenHeader, @RequestBody Employee employee) {
+		var status = auth(tokenHeader, AccessLevel.Operator);
+		if (status != null) {
+			return status;
+		}
+		
+		var result = service.save(employee);
 		if (result.isEntityFound()) {
 			return ok(result.getData());
 		}
-		
-		if (result.getData() != null) {
-			return created(result.getData());
-		} 
 		
 		if (result.hasError()) {
 			return error();
@@ -58,7 +59,7 @@ public class ProductController extends AuthorizedController {
 	
 	@DeleteMapping("{id}")
 	public ResponseEntity<?> delete(@RequestHeader("Authorization") String tokenHeader, @PathVariable String id) {
-		var status = auth(tokenHeader, AccessLevel.Storekeeper);
+		var status = auth(tokenHeader, AccessLevel.Operator);
 		if (status != null) {
 			return status;
 		}

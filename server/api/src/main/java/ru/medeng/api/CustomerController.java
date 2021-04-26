@@ -37,7 +37,7 @@ public class CustomerController extends AuthorizedController {
 	}
 	
 	@PutMapping
-	public ResponseEntity<?> save(@RequestHeader String tokenHeader, @RequestBody Customer customer) {
+	public ResponseEntity<?> save(@RequestHeader("Authorization") String tokenHeader, @RequestBody Customer customer) {
 		var status = auth(tokenHeader, customer.getAuth());
 		if (status != null) {
 			return status;
@@ -52,7 +52,7 @@ public class CustomerController extends AuthorizedController {
 	}
 	
 	@GetMapping("{id}")
-	public ResponseEntity<?> get(@RequestHeader String tokenHeader, @PathVariable String id) {
+	public ResponseEntity<?> get(@RequestHeader("Authorization") String tokenHeader, @PathVariable String id) {
 		var uuid = UUID.fromString(id);
 		var status = auth(tokenHeader, uuid);
 		if (status != null) {
@@ -68,7 +68,7 @@ public class CustomerController extends AuthorizedController {
 	}
 
 	@GetMapping
-	public ResponseEntity<?> search(@RequestHeader String tokenHeader, @RequestParam String query) {
+	public ResponseEntity<?> search(@RequestHeader("Authorization") String tokenHeader, @RequestParam String query) {
 		var status = auth(tokenHeader, AccessLevel.Operator);
 		if (status != null) {
 			return status;
@@ -83,7 +83,7 @@ public class CustomerController extends AuthorizedController {
 	}
 	
 	@DeleteMapping("{id}")
-	public ResponseEntity<?> delete(@RequestHeader String tokenHeader, @PathVariable String id) {
+	public ResponseEntity<?> delete(@RequestHeader("Authorization") String tokenHeader, @PathVariable String id) {
 		var uuid = UUID.fromString(id);
 		var status = auth(tokenHeader, uuid);
 		if (status != null) {

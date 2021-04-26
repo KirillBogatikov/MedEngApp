@@ -21,7 +21,7 @@ public class ShipmentController extends AuthorizedController {
 	private ShipmentService service;
 	
 	@GetMapping("/rest")
-	public ResponseEntity<?> getRest(@RequestHeader String tokenHeader) {
+	public ResponseEntity<?> getRest(@RequestHeader("Authorization") String tokenHeader) {
 		var status = auth(tokenHeader, AccessLevel.Operator);
 		if (status != null) {
 			return status;
@@ -36,7 +36,7 @@ public class ShipmentController extends AuthorizedController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<?> add(@RequestHeader String tokenHeader, @RequestBody Operation operation) {
+	public ResponseEntity<?> add(@RequestHeader("Authorization") String tokenHeader, @RequestBody Operation operation) {
 		var status = auth(tokenHeader, AccessLevel.Storekeeper);
 		if (status != null) {
 			return status;
