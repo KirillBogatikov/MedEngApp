@@ -12,6 +12,12 @@
     <string name="add_product_label">Добавить продукт</string>
     <string name="current_order_label">Текущий заказ</string>
 
+    <string name="login_failed">Пользователь не найден, либо введен некорректный пароль</string>
+    <string name="login_success">Вход выполнен</string>
+
+    <string name="signup_failed">Вы заполнили не все поля, либо ввели некореектные значения</string>
+    <string name="signup_success">Вы успешно зарегистрированы. Теперь можно выполнить вход</string>
+
     <string-array name="order_status">
         <item name="created">Создан</item>
         <item name="processing">В обработке</item>
@@ -31,4 +37,6 @@
     <string name="login_label">Логин</string>
     <string name="password_label">Пароль</string>
     <string name="auth_title">Вход и регистрация</string>
+    <string name="login_action">Войти</string>
+    <string name="signup_label">Зарегистрироваться</string>
 </resources>

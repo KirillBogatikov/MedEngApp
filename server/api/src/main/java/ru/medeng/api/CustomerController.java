@@ -51,15 +51,14 @@ public class CustomerController extends AuthorizedController {
 		return ok(result.getData());
 	}
 	
-	@GetMapping("{id}")
-	public ResponseEntity<?> get(@RequestHeader("Authorization") String tokenHeader, @PathVariable String id) {
-		var uuid = UUID.fromString(id);
-		var status = auth(tokenHeader, uuid);
+	@GetMapping
+	public ResponseEntity<?> get(@RequestHeader("Authorization") String tokenHeader) {
+		var status = auth(tokenHeader);
 		if (status != null) {
 			return status;
 		}
 		
-		var result = service.get(uuid);
+		var result = service.get(token.getUserId());
 		if (result.hasError()) {
 			return error();
 		}
@@ -67,7 +66,7 @@ public class CustomerController extends AuthorizedController {
 		return ok(result.getData());
 	}
 
-	@GetMapping
+	@GetMapping("search")
 	public ResponseEntity<?> search(@RequestHeader("Authorization") String tokenHeader, @RequestParam(required=false) String query) {
 		var status = auth(tokenHeader, AccessLevel.Operator);
 		if (status != null) {

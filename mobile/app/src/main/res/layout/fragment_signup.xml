@@ -11,12 +11,13 @@
         android:gravity="center"
         android:padding="@dimen/auth_root_padding">
 
-        <include layout="@layout/customer_info"/>
+        <include layout="@layout/view_customer_info"/>
 
         <Button
+            android:id="@+id/signup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Зарегистрироваться" />
+            android:text="@string/signup_label" />
 
     </LinearLayout>
  </ScrollView>

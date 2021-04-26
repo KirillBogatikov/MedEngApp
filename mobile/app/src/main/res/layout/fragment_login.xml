@@ -5,41 +5,19 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:padding="@dimen/auth_root_padding">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.auth.AuthFragment">
 
-    <TextView
+    <include layout="@layout/view_auth_info"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Логин"
-        android:textSize="@dimen/edit_text_hint_text" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/edit_text_divider"
-        android:autofillHints=""
-        android:hint="Логин"
-        android:inputType="textPersonName|phone|textEmailAddress"
-        android:textSize="@dimen/edit_text_value" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Пароль"
-        android:textSize="@dimen/edit_text_hint_text" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/edit_text_divider"
-        android:autofillHints=""
-        android:hint="Пароль"
-        android:inputType="textPassword"
-        android:textSize="@dimen/edit_text_value" />
+        android:layout_height="wrap_content"/>
 
     <Button
+        android:id="@+id/signin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Вход" />
+        android:text="@string/login_action"
+        android:layout_marginStart="@dimen/customer_info_padding_horizontal"
+        android:layout_marginEnd="@dimen/customer_info_padding_horizontal"/>
 
 </LinearLayout>

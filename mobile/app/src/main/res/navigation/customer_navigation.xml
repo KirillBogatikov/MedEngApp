@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="ru.medeng.mobile.ui.basic.ListFragment"
+        android:name="ru.medeng.mobile.ui.ProductFragment"
         android:label="@string/product_title"
         tools:layout="@layout/fragment_list" />
 

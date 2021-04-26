@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.AccountFragment"
-    android:layout_marginBottom="@dimen/design_bottom_navigation_height">
+    tools:context=".ui.user.AccountFragment">
 
-    <include layout="@layout/customer_info"/>
+    <include
+        layout="@layout/view_customer_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="@dimen/fab_margin"
         android:layout_marginBottom="@dimen/fab_margin"
-        android:src="@drawable/done"
-        android:contentDescription="@string/save_label" />
+        android:contentDescription="@string/save_label"
+        android:src="@drawable/done" />
 </RelativeLayout>
