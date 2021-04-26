@@ -29,12 +29,17 @@ public class OrderController extends AuthorizedController {
 	@GetMapping
 	public ResponseEntity<?> list(@RequestHeader("Authorization") String tokenHeader,
 			@RequestParam(required = false) String orderStatus) {
-		var status = auth(tokenHeader, AccessLevel.Customer);
+		var status = auth(tokenHeader, AccessLevel.Customer, AccessLevel.Storekeeper);
 		if (status != null) {
 			return status;
 		}
 
-		var result = service.list(token.getUserId(), orderStatus);
+		var id = token.getUserId();
+		if (accessLevel == AccessLevel.Storekeeper) {
+			id = null;
+		}
+		
+		var result = service.list(id, orderStatus);
 		if (result.hasError()) {
 			return error();
 		}

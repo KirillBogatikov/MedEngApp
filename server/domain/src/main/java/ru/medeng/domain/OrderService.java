@@ -29,7 +29,16 @@ public class OrderService {
 
 	public Result<List<Order>> list(UUID userId, String orderStatus) {
 		try {
-			return Result.ok(orders.list(userId, orderStatus == null ? null : Status.valueOf(orderStatus)));
+			var status = orderStatus == null ? null : Status.valueOf(orderStatus);
+			List<Order> data;
+			
+			if (userId == null) {
+				data = orders.all(status);
+			} else {
+				data = orders.list(userId, status);
+			}
+			
+			return Result.ok(data);
 		} catch(Exception e) {
 			e.printStackTrace();
 			return Result.error(e.getMessage());

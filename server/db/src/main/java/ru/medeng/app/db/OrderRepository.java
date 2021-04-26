@@ -48,9 +48,7 @@ public class OrderRepository extends SqlRepository {
 		return query(r -> 1, sql("order", "has_customer"), id) != null;
 	}
 	
-	public List<Order> list(UUID userId, Status status) throws SQLException, IOException {
-		var data = queryList(order, sql("order", "list"), userId);
-		
+	private void fillAndFilter(List<Order> data, Status status) throws SQLException, IOException {
 		if (status != null) {
 			for (int i = 0; i < data.size(); ) {
 				var last = query(r -> Status.valueOf(r.getString("status")), sql("order/status", "last"), data.get(i).getId());
@@ -66,7 +64,17 @@ public class OrderRepository extends SqlRepository {
 			o.setHistory(queryList(statusInfo, sql("order/status", "list_by_order"), o.getId()));
 			o.setItems(queryList(item, sql("order/item", "list_by_order"), o.getId()));
 		};
-		
+	}
+	
+	public List<Order> list(UUID userId, Status status) throws SQLException, IOException {
+		var data = queryList(order, sql("order", "list"), userId);
+		fillAndFilter(data, status);
+		return data;
+	}
+	
+	public List<Order> all(Status status) throws SQLException, IOException {
+		var data = queryList(order, sql("order", "all"));
+		fillAndFilter(data, status);
 		return data;
 	}
 
