@@ -1,0 +1,1 @@
+web: java -jar -server -Dserver.port=$PORT --enable-preview api/target/api-0.0.1.jar

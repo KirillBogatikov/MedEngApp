@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="35dp"
+    android:paddingBottom="0dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/product_label"
+        android:textSize="@dimen/edit_text_hint_text" />
+    <Spinner
+        android:id="@+id/product"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/edit_text_divider"
+        android:textSize="@dimen/edit_text_value" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/count_label"
+        android:textSize="@dimen/edit_text_hint_text" />
+    <EditText
+        android:id="@+id/count"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/edit_text_divider"
+        android:autofillHints=""
+        android:hint="@string/count_label"
+        android:inputType="numberDecimal"
+        android:textSize="@dimen/edit_text_value" />
+
+</LinearLayout>

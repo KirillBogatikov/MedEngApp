@@ -1,0 +1,1 @@
+INSERT INTO "order" ("id", "customer") VALUES (?, ?);

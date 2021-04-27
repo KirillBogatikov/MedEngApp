@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="5dp"
+    android:paddingLeft="7dp"
+    android:paddingRight="7dp"
+    android:paddingBottom="15dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:textSize="27sp"
+            android:textColor="@color/red_dark"
+            android:layout_marginBottom="10dp"/>
+
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/add_cart"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/cart"/>
+
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/remove_cart"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/remove_cart"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:layout_marginBottom="10dp"/>
+
+    <LinearLayout
+        android:id="@+id/available_parent"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:text="@string/available_label"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textAlignment="textStart"
+            android:textColor="@color/blue_dark"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/available_count"
+            android:text="0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="textStart"
+            android:textColor="@color/blue_dark"
+            android:textSize="18sp"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/booked_parent"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:text="@string/booked_label"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textAlignment="textStart"
+            android:textColor="@color/blue_dark"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/booked_count"
+            android:text="0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="textStart"
+            android:textColor="@color/blue_dark"
+            android:textSize="18sp"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/red_origin"/>
+
+</LinearLayout>

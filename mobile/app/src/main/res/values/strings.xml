@@ -1,0 +1,57 @@
+<resources>
+    <string name="app_name">МедИнж Пенза</string>
+    <string name="product_title">Продукты</string>
+    <string name="account_title">Личный кабинет</string>
+    <string name="orders_title">Заказы</string>
+    <string name="first_name_label">Имя</string>
+    <string name="last_name_label">Фамилия</string>
+    <string name="patronymic_label">Отчество</string>
+    <string name="phone_label">Номер телефона</string>
+    <string name="email_label">Адрес эл. почты</string>
+    <string name="save_label">Сохранить</string>
+    <string name="add_product_label">Добавить продукт</string>
+    <string name="current_order_label">Текущий заказ</string>
+
+    <string name="login_failed">Пользователь не найден, либо введен некорректный пароль</string>
+    <string name="login_success">Вход выполнен</string>
+
+    <string name="signup_failed">Вы заполнили не все поля, либо ввели некореектные значения</string>
+    <string name="signup_success">Вы успешно зарегистрированы. Теперь можно выполнить вход</string>
+
+    <string-array name="order_status">
+        <item name="created">Создан</item>
+        <item name="processing">В обработке</item>
+        <item name="booked">В процессе сборки</item>
+        <item name="ready">Собран</item>
+        <item name="received">Получен</item>
+        <item name="canceled">Отменен</item>
+    </string-array>
+
+    <string-array name="auth_pages">
+        <item name="login">Вход</item>
+        <item name="signup">Регистрация</item>
+    </string-array>
+
+    <string-array name="access_level">
+        <item name="customer">Клиент</item>
+        <item name="operator">Оператор</item>
+        <item name="storekeeper">Кладовщик</item>
+        <item name="guest">Гость</item>
+    </string-array>
+
+    <string name="count_label">Количество</string>
+    <string name="product_label">Продукт</string>
+    <string name="login_label">Логин</string>
+    <string name="password_label">Пароль</string>
+    <string name="auth_title">Вход и регистрация</string>
+    <string name="login_action">Войти</string>
+    <string name="signup_label">Зарегистрироваться</string>
+    <string name="list_orders_title">Все заказы</string>
+    <string name="logout_label">Выйти</string>
+    <string name="customers_title">Клиенты</string>
+    <string name="booked_label">Забронировано:</string>
+    <string name="available_label">Доступно:</string>
+    <string name="name_label">Название</string>
+    <string name="description_label">Описание</string>
+    <string name="employees_title">Сотрудники</string>
+</resources>
