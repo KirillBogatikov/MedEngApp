@@ -7,8 +7,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Response;
-import ru.medeng.mobile.api.NetworkThread;
-import ru.medeng.mobile.api.rest.ProductService;
+import ru.medeng.tools.NetworkThread;
 import ru.medeng.mobile.api.rest.ShipmentService;
 import ru.medeng.models.Rest;
 import ru.medeng.models.order.Operation;

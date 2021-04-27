@@ -1,7 +1,6 @@
-package ru.medeng.mobile.ui.auth;
+package ru.medeng.mobile.ui.guest;
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;

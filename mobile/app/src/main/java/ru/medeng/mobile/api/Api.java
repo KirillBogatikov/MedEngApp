@@ -12,35 +12,22 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
-import retrofit2.Call;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import ru.medeng.mobile.api.impl.AuthServiceImpl;
 import ru.medeng.mobile.api.impl.CustomerServiceImpl;
+import ru.medeng.mobile.api.impl.EmployeeServiceImpl;
 import ru.medeng.mobile.api.impl.OrderServiceImpl;
 import ru.medeng.mobile.api.impl.ProductServiceImpl;
 import ru.medeng.mobile.api.impl.ShipmentServiceImpl;
 import ru.medeng.mobile.api.rest.AuthService;
 import ru.medeng.mobile.api.rest.CustomerService;
+import ru.medeng.mobile.api.rest.EmployeeService;
 import ru.medeng.mobile.api.rest.OrderService;
 import ru.medeng.mobile.api.rest.ProductService;
 import ru.medeng.mobile.api.rest.ShipmentService;
-import ru.medeng.models.LevelHolder;
-import ru.medeng.models.Product;
-import ru.medeng.models.Rest;
-import ru.medeng.models.TokenHolder;
-import ru.medeng.models.order.Item;
-import ru.medeng.models.order.Operation;
-import ru.medeng.models.order.Order;
-import ru.medeng.models.user.AccessLevel;
-import ru.medeng.models.user.Customer;
+import ru.medeng.tools.NetworkThread;
 
 public class Api {
     private static Api instance;
@@ -72,6 +59,9 @@ public class Api {
 
     private ShipmentService shipments;
     private ShipmentServiceImpl shipmentsImpl;
+
+    private EmployeeService employees;
+    private EmployeeServiceImpl employeesImpl;
 
     public Api() {
         Gson gson = new GsonBuilder()
@@ -109,6 +99,7 @@ public class Api {
         products = retrofit.create(ProductService.class);
         orders = retrofit.create(OrderService.class);
         shipments = retrofit.create(ShipmentService.class);
+        employees = retrofit.create(EmployeeService.class);
 
         thread = new NetworkThread();
 
@@ -117,6 +108,7 @@ public class Api {
         ordersImpl = new OrderServiceImpl(authImpl, orders, thread);
         productsImpl = new ProductServiceImpl(authImpl, products, thread);
         shipmentsImpl = new ShipmentServiceImpl(authImpl, shipments, thread);
+        employeesImpl = new EmployeeServiceImpl(authImpl, employees, thread);
     }
 
     public boolean ping() {
@@ -165,5 +157,9 @@ public class Api {
 
     public ShipmentServiceImpl getShipments() {
         return shipmentsImpl;
+    }
+
+    public EmployeeServiceImpl getEmployees() {
+        return employeesImpl;
     }
 }

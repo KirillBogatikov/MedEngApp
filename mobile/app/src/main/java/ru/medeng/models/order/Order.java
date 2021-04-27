@@ -31,4 +31,8 @@ public class Order {
 	public void setHistory(List<StatusInfo> history) {
 		this.history = history;
 	}
+
+	public Status getStatus() {
+		return history.get(history.size() - 1).getStatus();
+	}
 }

@@ -36,7 +36,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderViewHolder> {
         List<StatusInfo> history = o.getHistory();
         Collections.sort(history, (a, b) -> a.getDate().compareTo(b.getDate()));
         holder.setDate(history.get(0).getDate());
-        holder.setStatus(history.get(history.size() - 1).getStatus().toString());
+        holder.setStatus(history.get(history.size() - 1).getStatus());
         holder.setItems(o.getItems());
         holder.setOrder(o);
     }

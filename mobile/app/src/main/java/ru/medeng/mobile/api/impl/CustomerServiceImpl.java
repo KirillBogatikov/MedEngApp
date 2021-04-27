@@ -8,7 +8,7 @@ import java.util.UUID;
 
 import retrofit2.Call;
 import retrofit2.Response;
-import ru.medeng.mobile.api.NetworkThread;
+import ru.medeng.tools.NetworkThread;
 import ru.medeng.mobile.api.rest.CustomerService;
 import ru.medeng.models.user.Customer;
 

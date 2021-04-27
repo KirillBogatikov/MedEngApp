@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:gravity="center"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.auth.AuthFragment">
+    tools:context=".ui.guest.AuthFragment">
 
     <include layout="@layout/view_auth_info"
         android:layout_width="match_parent"

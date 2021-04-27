@@ -1,13 +1,10 @@
-package ru.medeng.mobile.api;
+package ru.medeng.tools;
 
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 
-import java.lang.ref.SoftReference;
 import java.util.concurrent.atomic.AtomicReference;
-
-import ru.medeng.mobile.Producer;
 
 public class NetworkThread extends Thread {
     private static final String TAG = NetworkThread.class.getSimpleName();

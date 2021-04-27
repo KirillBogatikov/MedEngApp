@@ -4,8 +4,7 @@ import android.util.Log;
 
 import retrofit2.Call;
 import retrofit2.Response;
-import ru.medeng.mobile.api.Api;
-import ru.medeng.mobile.api.NetworkThread;
+import ru.medeng.tools.NetworkThread;
 import ru.medeng.mobile.api.rest.AuthService;
 import ru.medeng.models.LevelHolder;
 import ru.medeng.models.TokenHolder;

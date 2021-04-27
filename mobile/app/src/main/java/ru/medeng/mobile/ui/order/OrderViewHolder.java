@@ -15,8 +15,10 @@ import java.util.Locale;
 import ru.medeng.mobile.R;
 import ru.medeng.models.order.Item;
 import ru.medeng.models.order.Order;
+import ru.medeng.models.order.Status;
 
 public class OrderViewHolder extends RecyclerView.ViewHolder {
+    private String[] orderStatusText;
     private TextView date, status;
     private RecyclerView items;
     private OrderClickListener listener;
@@ -24,6 +26,8 @@ public class OrderViewHolder extends RecyclerView.ViewHolder {
 
     public OrderViewHolder(View view, OrderClickListener listener) {
         super(view);
+
+        orderStatusText = view.getContext().getResources().getStringArray(R.array.order_status);
 
         date = view.findViewById(R.id.date);
         status = view.findViewById(R.id.status);
@@ -43,8 +47,8 @@ public class OrderViewHolder extends RecyclerView.ViewHolder {
         this.date.setText(sdf.format(date));
     }
 
-    public void setStatus(String status) {
-        this.status.setText(status);
+    public void setStatus(Status status) {
+        this.status.setText(orderStatusText[status.getCode()]);
     }
 
     public void setItems(List<Item> items) {

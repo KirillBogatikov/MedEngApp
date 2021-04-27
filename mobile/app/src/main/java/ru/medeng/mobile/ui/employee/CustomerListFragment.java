@@ -1,4 +1,4 @@
-package ru.medeng.mobile.ui.user;
+package ru.medeng.mobile.ui.employee;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,10 +15,10 @@ import ru.medeng.mobile.MainActivity;
 import ru.medeng.mobile.R;
 import ru.medeng.mobile.api.Api;
 import ru.medeng.mobile.ui.product.ProductAdapter;
+import ru.medeng.mobile.ui.user.CustomerAdapter;
 
 public class CustomerListFragment extends Fragment {
     private View root;
-    private ProductAdapter adapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {

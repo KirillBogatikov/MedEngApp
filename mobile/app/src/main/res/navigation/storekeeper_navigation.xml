@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="ru.medeng.mobile.ui.product.ProductFragment"
+        android:name="ru.medeng.mobile.ui.storekeeper.ProductFragment"
         android:label="@string/product_title"
         tools:layout="@layout/fragment_list" />
 
     <fragment
         android:id="@+id/navigation_account"
-        android:name="ru.medeng.mobile.ui.user.CustomerListFragment"
-        android:label="@string/customers_title"
+        android:name="ru.medeng.mobile.ui.storekeeper.EmployeeListFragment"
+        android:label="@string/employees_title"
         tools:layout="@layout/fragment_account" />
 
     <fragment
         android:id="@+id/navigation_list"
-        android:name="ru.medeng.mobile.ui.order.OrderListFragment"
+        android:name="ru.medeng.mobile.ui.employee.OrderListFragment"
         android:label="@string/orders_title"
         tools:layout="@layout/fragment_order_list" />
 </navigation>

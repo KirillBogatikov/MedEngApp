@@ -32,6 +32,13 @@
         <item name="signup">Регистрация</item>
     </string-array>
 
+    <string-array name="access_level">
+        <item name="customer">Клиент</item>
+        <item name="operator">Оператор</item>
+        <item name="storekeeper">Кладовщик</item>
+        <item name="guest">Гость</item>
+    </string-array>
+
     <string name="count_label">Количество</string>
     <string name="product_label">Продукт</string>
     <string name="login_label">Логин</string>
@@ -46,4 +53,5 @@
     <string name="available_label">Доступно:</string>
     <string name="name_label">Название</string>
     <string name="description_label">Описание</string>
+    <string name="employees_title">Сотрудники</string>
 </resources>

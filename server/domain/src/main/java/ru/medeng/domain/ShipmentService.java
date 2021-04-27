@@ -18,6 +18,7 @@ public class ShipmentService {
 
 	public Result<UUID> add(Operation operation) {
 		try {
+			operation.setId(UUID.randomUUID());
 			operation.setType(Type.Shipment);
 			var found = repo.insert(operation);
 			return found ? Result.ok(operation.getId()) : Result.notFound();

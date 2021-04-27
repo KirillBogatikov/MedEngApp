@@ -1,11 +1,9 @@
-package ru.medeng.mobile.ui.auth;
+package ru.medeng.mobile.ui.guest;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
@@ -13,7 +11,6 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 
 import ru.medeng.mobile.R;
-import ru.medeng.mobile.api.Api;
 
 
 public class AuthFragment extends Fragment {

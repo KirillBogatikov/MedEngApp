@@ -10,7 +10,7 @@ import java.util.UUID;
 
 import retrofit2.Call;
 import retrofit2.Response;
-import ru.medeng.mobile.api.NetworkThread;
+import ru.medeng.tools.NetworkThread;
 import ru.medeng.mobile.api.rest.OrderService;
 import ru.medeng.models.Product;
 import ru.medeng.models.order.Item;
@@ -59,6 +59,10 @@ public class OrderServiceImpl {
 
     public List<Item> getOrderItems() {
         List<Item> items = new ArrayList<>();
+
+        if (currentOrderItems == null) {
+            return items;
+        }
 
         for (Map.Entry<Product, Integer> e : currentOrderItems.entrySet()) {
             Item item = new Item();

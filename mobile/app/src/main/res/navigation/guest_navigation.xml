@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="ru.medeng.mobile.ui.product.ProductFragment"
+        android:name="ru.medeng.mobile.ui.guest.ProductFragment"
         android:label="@string/product_title"
         tools:layout="@layout/fragment_list" />
 
     <fragment
         android:id="@+id/navigation_account"
-        android:name="ru.medeng.mobile.ui.auth.AuthFragment"
+        android:name="ru.medeng.mobile.ui.guest.AuthFragment"
         android:label="@string/auth_title"
         tools:layout="@layout/fragment_auth" />
 

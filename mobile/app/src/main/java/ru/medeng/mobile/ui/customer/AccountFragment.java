@@ -1,4 +1,4 @@
-package ru.medeng.mobile.ui.user;
+package ru.medeng.mobile.ui.customer;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
