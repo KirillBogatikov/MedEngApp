@@ -16,16 +16,18 @@ import ru.medeng.models.order.StatusInfo;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderViewHolder> {
     private List<Order> list;
+    private OrderClickListener listener;
 
-    public OrderAdapter(List<Order> list) {
+    public OrderAdapter(List<Order> list, OrderClickListener listener) {
         this.list = list;
+        this.listener = listener;
     }
 
     @NonNull
     @Override
     public OrderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        return new OrderViewHolder(inflater.inflate(R.layout.view_order, parent, false));
+        return new OrderViewHolder(inflater.inflate(R.layout.view_order, parent, false), listener);
     }
 
     @Override
@@ -36,6 +38,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderViewHolder> {
         holder.setDate(history.get(0).getDate());
         holder.setStatus(history.get(history.size() - 1).getStatus().toString());
         holder.setItems(o.getItems());
+        holder.setOrder(o);
     }
 
     @Override

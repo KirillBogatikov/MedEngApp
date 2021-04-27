@@ -22,8 +22,19 @@ import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import ru.medeng.mobile.api.impl.AuthServiceImpl;
+import ru.medeng.mobile.api.impl.CustomerServiceImpl;
+import ru.medeng.mobile.api.impl.OrderServiceImpl;
+import ru.medeng.mobile.api.impl.ProductServiceImpl;
+import ru.medeng.mobile.api.impl.ShipmentServiceImpl;
+import ru.medeng.mobile.api.rest.AuthService;
+import ru.medeng.mobile.api.rest.CustomerService;
+import ru.medeng.mobile.api.rest.OrderService;
+import ru.medeng.mobile.api.rest.ProductService;
+import ru.medeng.mobile.api.rest.ShipmentService;
 import ru.medeng.models.LevelHolder;
 import ru.medeng.models.Product;
+import ru.medeng.models.Rest;
 import ru.medeng.models.TokenHolder;
 import ru.medeng.models.order.Item;
 import ru.medeng.models.order.Operation;
@@ -46,15 +57,21 @@ public class Api {
 
     private NetworkThread thread;
 
-    private String token;
-    private AccessLevel level;
-    private Map<Product, Integer> currentOrderItems;
-
     private Retrofit retrofit;
-    private CustomerService customers;
     private AuthService auth;
+    private AuthServiceImpl authImpl;
+
+    private CustomerService customers;
+    private CustomerServiceImpl customersImpl;
+
     private ProductService products;
+    private ProductServiceImpl productsImpl;
+
     private OrderService orders;
+    private OrderServiceImpl ordersImpl;
+
+    private ShipmentService shipments;
+    private ShipmentServiceImpl shipmentsImpl;
 
     public Api() {
         Gson gson = new GsonBuilder()
@@ -87,12 +104,19 @@ public class Api {
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build();
 
-        customers = retrofit.create(CustomerService.class);
         auth = retrofit.create(AuthService.class);
+        customers = retrofit.create(CustomerService.class);
         products = retrofit.create(ProductService.class);
         orders = retrofit.create(OrderService.class);
+        shipments = retrofit.create(ShipmentService.class);
 
         thread = new NetworkThread();
+
+        authImpl = new AuthServiceImpl(auth, thread);
+        customersImpl = new CustomerServiceImpl(authImpl, customers, thread);
+        ordersImpl = new OrderServiceImpl(authImpl, orders, thread);
+        productsImpl = new ProductServiceImpl(authImpl, products, thread);
+        shipmentsImpl = new ShipmentServiceImpl(authImpl, shipments, thread);
     }
 
     public boolean ping() {
@@ -108,193 +132,38 @@ public class Api {
         });
     }
 
-    public boolean login(CharSequence login, CharSequence password) {
-        try {
-            token = thread.await(() -> {
-                Call<TokenHolder> call = auth.login(login, password);
-                Response<TokenHolder> resp = call.execute();
-                if (resp.code() == 200) {
-                    return resp.body().getToken();
-                }
-
-                return null;
-            });
-
-            return token != null;
-        } catch(Exception e) {
-            Log.e(TAG, "Failed to login", e);
-            return false;
-        }
-    }
-
     public void logout() {
-        token = null;
-        level = null;
-        currentOrderItems = null;
-    }
-
-    public int signup(Customer customer) {
-        return thread.await(() -> {
-            try {
-                Call<UUID> call = customers.signup(customer);
-                Response<UUID> resp = call.execute();
-                return resp.code() == 200 ? 200 : 400;
-            } catch(Exception e) {
-                Log.d(TAG, "Failed signup", e);
-                return 500;
-            }
-        });
-    }
-
-    public Customer getCustomer() {
-        return thread.await(() -> {
-            try {
-                Call<Customer> call = customers.get(token);
-                Response<Customer> resp = call.execute();
-                if (resp.code() == 200) {
-                    return resp.body();
-                }
-
-                return null;
-            } catch(Exception e) {
-                Log.d(TAG, "Failed to get customer info", e);
-                return null;
-            }
-        });
-    }
-
-    public int saveCustomer(Customer customer) {
-        return thread.await(() -> {
-            try {
-                Call<Void> call = customers.save(token, customer);
-                Response<Void> resp = call.execute();
-                return resp.code();
-            } catch (Exception e) {
-                return 500;
-            }
-        });
-    }
-
-    public List<Product> listProducts() {
-        return thread.await(() -> {
-            try {
-                Call<List<Product>> call = products.list();
-                Response<List<Product>> resp = call.execute();
-                if (resp.code() == 200) {
-                    return resp.body();
-                }
-
-                Log.d(TAG, "Unexpected status: " + resp.code());
-            } catch (Exception e) {
-                Log.d(TAG, "listProducts", e);
-            }
-
-            return Collections.emptyList();
-        });
-    }
-
-    public List<Order> listOrders() {
-        return thread.await(() -> {
-            try {
-                Call<List<Order>> call = orders.list(token);
-                Response<List<Order>> resp = call.execute();
-                if (resp.code() == 200) {
-                    return resp.body();
-                }
-
-                Log.d(TAG, "Unexpected status: " + resp.code());
-            } catch (Exception e) {
-                Log.d(TAG, "Failed to list orders", e);
-            }
-
-            return Collections.emptyList();
-        });
+        authImpl.logout();
+        ordersImpl.setOrderMap(null);
     }
 
     public void read(SharedPreferences prefs) {
-        token = prefs.getString("token", null);
+        String token = prefs.getString("token", null);
+        authImpl.setToken(token);
+        authImpl.getAccessLevel();
     }
 
     public void save(SharedPreferences prefs) {
-        prefs.edit().putString("token", token).apply();
+        prefs.edit().putString("token", authImpl.getToken()).apply();
     }
 
-    public AccessLevel getAccessLevel() {
-        AccessLevel level = thread.await(() -> {
-            try {
-                Call<LevelHolder> call = auth.getAccessLevel(token);
-                Response<LevelHolder> resp = call.execute();
-                if (resp.code() == 200) {
-                    return resp.body().getLevel();
-                }
-
-                return AccessLevel.Guest;
-            } catch(Exception e) {
-                Log.d(TAG, "Failed to get access level", e);
-                return AccessLevel.Guest;
-            }
-        });
-
-        this.level = level;
-        return level;
+    public AuthServiceImpl getAuth() {
+        return authImpl;
     }
 
-    public AccessLevel getCachedAccessLevel() {
-        return level;
+    public CustomerServiceImpl getCustomers() {
+        return customersImpl;
     }
 
-    public void setOrderMap(Map<Product, Integer> currentOrderItems) {
-        this.currentOrderItems = currentOrderItems;
+    public OrderServiceImpl getOrders() {
+        return ordersImpl;
     }
 
-    public Map<Product, Integer> getOrderMap() {
-        return currentOrderItems;
+    public ProductServiceImpl getProducts() {
+        return productsImpl;
     }
 
-    public List<Item> getOrderItems() {
-        List<Item> items = new ArrayList<>();
-
-        for (Map.Entry<Product, Integer> e : currentOrderItems.entrySet()) {
-            Item item = new Item();
-            Operation o = new Operation();
-            o.setProduct(e.getKey());
-            o.setCount(e.getValue());
-            item.setBooking(o);
-            items.add(item);
-        }
-
-        return items;
-    }
-
-    public int createOrder() {
-        return thread.await(() -> {
-           try {
-               Order order = new Order();
-
-               List<Item> items = new ArrayList<>();
-               for (Item oldItem : getOrderItems()) {
-                   Operation oldBooking = oldItem.getBooking();
-                   Product oldProduct = oldBooking.getProduct();
-
-                   Item newItem = new Item();
-                   Operation newBooking = new Operation();
-                   Product newProduct = new Product();
-
-                   newProduct.setId(oldProduct.getId());
-                   newBooking.setProduct(newProduct);
-                   newBooking.setCount(oldBooking.getCount());
-                   newItem.setBooking(newBooking);
-                   items.add(newItem);
-               }
-               order.setItems(items);
-
-               Call<Void> call = orders.create(token, order);
-               Response<Void> resp = call.execute();
-               return resp.code();
-           } catch(Exception e) {
-               Log.d(TAG, "Failed to create order", e);
-               return 500;
-           }
-        });
+    public ShipmentServiceImpl getShipments() {
+        return shipmentsImpl;
     }
 }

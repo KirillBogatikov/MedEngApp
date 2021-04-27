@@ -25,7 +25,7 @@ public class LoginFragment extends Fragment {
         login = root.findViewById(R.id.login);
         password = root.findViewById(R.id.password);
         root.findViewById(R.id.signin).setOnClickListener(v -> {
-            boolean ok = Api.getInstance().login(login.getText(), password.getText());
+            boolean ok = Api.getInstance().getAuth().login(login.getText(), password.getText());
             if (ok) {
                 Toast.makeText(login.getContext(), R.string.login_success, Toast.LENGTH_LONG).show();
                 MainActivity.navigationUpdateListener.invalidateNavigationBar();

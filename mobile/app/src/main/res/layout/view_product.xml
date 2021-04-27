@@ -46,6 +46,61 @@
         android:textSize="14sp"
         android:layout_marginBottom="10dp"/>
 
+    <LinearLayout
+        android:id="@+id/available_parent"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:text="@string/available_label"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textAlignment="textStart"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/available_count"
+            android:text="0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="textStart"
+            android:textSize="14sp"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/booked_parent"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:text="@string/booked_label"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textAlignment="textStart"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/booked_count"
+            android:text="0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="textStart"
+            android:textSize="14sp"/>
+
+    </LinearLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="2dp"

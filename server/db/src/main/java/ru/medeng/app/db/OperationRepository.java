@@ -3,8 +3,8 @@ package ru.medeng.app.db;
 import static ru.medeng.tools.Resources.sql;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -35,7 +35,7 @@ public class OperationRepository extends SqlRepository {
 	}
 
 	public boolean insert(Operation o) throws SQLException, IOException {
-		o.setDate(new Date(System.currentTimeMillis()));
+		o.setDate(new Timestamp(System.currentTimeMillis()));
 		var p = o.getProduct();
 		if (hasProduct(p.getId())) {
 			execute(sql("operation", "insert").formatted(o.getType()), o.getId(), p.getId(), o.getCount(), o.getDate());
@@ -46,7 +46,7 @@ public class OperationRepository extends SqlRepository {
 	}
 
 	public List<Rest> getRest() throws SQLException, IOException {
-		var products = queryList(ProductRepository.product, sql("operation", "list_product.sql"));
+		var products = queryList(ProductRepository.product, sql("operation", "list_product"));
 		var result = new ArrayList<Rest>();
 		
 		for (var p : products) {
@@ -54,10 +54,10 @@ public class OperationRepository extends SqlRepository {
 			
 			rest.setProduct(p);
 			
-			var total = query(r -> r.getInt("count"), sql("operation", "count"), p.getId(), Type.Shipment.toString());
-			var booked = query(r -> r.getInt("count"), sql("operation", "count"), p.getId(), Type.Booking.toString());
+			var total = query(r -> r.getInt("count"), sql("operation", "count").formatted(Type.Shipment), p.getId());
+			var booked = query(r -> r.getInt("count"), sql("operation", "count").formatted(Type.Booking), p.getId());
 			
-			rest.setAvailable(total - booked);
+			rest.setAvailable(Math.max(total - booked, 0));
 			rest.setBooked(booked);
 			
 			result.add(rest);

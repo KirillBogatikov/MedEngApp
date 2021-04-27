@@ -1,5 +1,6 @@
-package ru.medeng.mobile.api;
+package ru.medeng.mobile.api.rest;
 
+import java.util.List;
 import java.util.UUID;
 
 import retrofit2.Call;
@@ -19,4 +20,7 @@ public interface CustomerService {
 
     @PUT("api/customer")
     Call<Void> save(@Header("Authorization") String token, @Body Customer customer);
+
+    @GET("api/customer/search")
+    Call<List<Customer>> list(@Header("Authorization") String token);
 }

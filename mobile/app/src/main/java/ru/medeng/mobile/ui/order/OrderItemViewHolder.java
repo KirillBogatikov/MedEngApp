@@ -19,7 +19,7 @@ public class OrderItemViewHolder extends RecyclerView.ViewHolder {
         count = view.findViewById(R.id.count);
     }
 
-    public void setProduct(String product) {
+    public void setProduct(CharSequence product) {
         this.product.setText(product);
     }
 

@@ -42,4 +42,8 @@
     <string name="list_orders_title">Все заказы</string>
     <string name="logout_label">Выйти</string>
     <string name="customers_title">Клиенты</string>
+    <string name="booked_label">Забронировано:</string>
+    <string name="available_label">Доступно:</string>
+    <string name="name_label">Название</string>
+    <string name="description_label">Описание</string>
 </resources>

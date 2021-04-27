@@ -5,8 +5,8 @@ import java.util.UUID;
 
 public class Product {
 	private UUID id;
-	private String name;
-	private String description;
+	private CharSequence name;
+	private CharSequence description;
 	
 	public UUID getId() {		
 		return id;
@@ -16,19 +16,19 @@ public class Product {
 		this.id = id;
 	}
 	
-	public String getName() {
+	public CharSequence getName() {
 		return name;
 	}
 	
-	public void setName(String name) {
+	public void setName(CharSequence name) {
 		this.name = name;
 	}
 
-	public String getDescription() {
+	public CharSequence getDescription() {
 		return description;
 	}
 
-	public void setDescription(String description) {
+	public void setDescription(CharSequence description) {
 		this.description = description;
 	}
 

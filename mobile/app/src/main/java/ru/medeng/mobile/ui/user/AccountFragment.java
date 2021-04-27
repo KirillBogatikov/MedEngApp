@@ -43,7 +43,7 @@ public class AccountFragment extends Fragment {
             auth.setLogin(login.getText());
             auth.setPassword(password.getText());
 
-            int status = Api.getInstance().saveCustomer(customer);
+            int status = Api.getInstance().getCustomers().saveCustomer(customer);
             switch (status) {
                 case 200: Toast.makeText(login.getContext(), "Данные сохранены", Toast.LENGTH_LONG).show(); break;
                 default: Toast.makeText(login.getContext(), "Произошла непредвиденная ошибка. Попробуйте позже", Toast.LENGTH_LONG).show(); break;
@@ -55,7 +55,7 @@ public class AccountFragment extends Fragment {
             MainActivity.navigationUpdateListener.invalidateNavigationBar();
         });
 
-        customer = Api.getInstance().getCustomer();
+        customer = Api.getInstance().getCustomers().getCustomer();
         if (customer != null) {
             firstName.setText(customer.getFirstName());
             lastName.setText(customer.getLastName());

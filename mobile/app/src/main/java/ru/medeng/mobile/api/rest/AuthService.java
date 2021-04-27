@@ -1,4 +1,4 @@
-package ru.medeng.mobile.api;
+package ru.medeng.mobile.api.rest;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

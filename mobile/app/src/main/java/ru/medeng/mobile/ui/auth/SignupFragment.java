@@ -43,7 +43,7 @@ public class SignupFragment extends Fragment {
             auth.setLogin(login.getText());
             auth.setPassword(password.getText());
 
-            int status = Api.getInstance().signup(customer);
+            int status = Api.getInstance().getCustomers().signup(customer);
             switch (status) {
                 case 200: Toast.makeText(login.getContext(), "Пользователь не найден!", Toast.LENGTH_LONG).show();
             }

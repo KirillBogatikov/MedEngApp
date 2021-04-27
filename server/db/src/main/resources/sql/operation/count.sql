@@ -3,4 +3,4 @@ SELECT
 FROM "operation" "o" 
 WHERE 
 	"o"."product" = ? AND 
-	"o"."type" = ?;
+	"o"."type" = '%s';

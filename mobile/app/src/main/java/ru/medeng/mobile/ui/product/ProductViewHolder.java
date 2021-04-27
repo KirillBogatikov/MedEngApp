@@ -6,6 +6,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.w3c.dom.Text;
+
 import java.util.Map;
 import java.util.UUID;
 
@@ -15,6 +17,8 @@ import ru.medeng.models.Product;
 public class ProductViewHolder extends RecyclerView.ViewHolder {
     private TextView name, description;
     private View addCart, removeCart;
+    private View availableParent, bookedParent;
+    private TextView availableCount, bookedCount;
     private Product product;
     private Map<Product, Integer> cart;
 
@@ -37,13 +41,18 @@ public class ProductViewHolder extends RecyclerView.ViewHolder {
             removeCart.setVisibility(View.GONE);
             addCart.setVisibility(View.VISIBLE);
         });
+
+        availableParent = view.findViewById(R.id.available_parent);
+        availableCount = availableParent.findViewById(R.id.available_count);
+        bookedParent = view.findViewById(R.id.booked_parent);
+        bookedCount = bookedParent.findViewById(R.id.booked_count);
     }
 
-    public void setName(String name) {
+    public void setName(CharSequence name) {
         this.name.setText(name);
     }
 
-    public void setDescription(String description) {
+    public void setDescription(CharSequence description) {
         this.description.setText(description);
     }
 
@@ -57,5 +66,15 @@ public class ProductViewHolder extends RecyclerView.ViewHolder {
                 removeCart.setVisibility(View.VISIBLE);
             }
         }
+    }
+
+    public void setAvailableCount(int availableCount) {
+        availableParent.setVisibility(View.VISIBLE);
+        this.availableCount.setText(String.valueOf(availableCount));
+    }
+
+    public void setBookedCount(int bookedCount) {
+        bookedParent.setVisibility(View.VISIBLE);
+        this.bookedCount.setText(String.valueOf(bookedCount));
     }
 }

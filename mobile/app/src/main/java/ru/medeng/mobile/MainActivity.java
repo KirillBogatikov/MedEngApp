@@ -7,6 +7,7 @@ import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -14,6 +15,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import ru.medeng.mobile.api.Api;
 import ru.medeng.mobile.ui.basic.NavigationUpdateListener;
+import ru.medeng.mobile.ui.order.OrderListFragment;
 
 public class MainActivity extends AppCompatActivity {
     public static NavigationUpdateListener navigationUpdateListener;
@@ -40,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
 
         navigationUpdateListener = () -> {
-            switch(Api.getInstance().getAccessLevel()) {
+            switch(Api.getInstance().getAuth().getAccessLevel()) {
                 case Guest:
                     navController.setGraph(R.navigation.guest_navigation);
                     navView.getMenu().getItem(1).setTitle(R.string.account_title);
@@ -52,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
                 case Operator:
                     navController.setGraph(R.navigation.operator_navigation);
                     navView.getMenu().getItem(1).setTitle(R.string.customers_title);
+                case Storekeeper:
+                    navController.setGraph(R.navigation.storekeeper_navigation);
 
             }
             navView.invalidate();
