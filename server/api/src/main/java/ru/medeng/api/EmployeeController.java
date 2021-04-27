@@ -25,7 +25,7 @@ public class EmployeeController extends AuthorizedController {
 	
 	@GetMapping
 	public ResponseEntity<?> list(@RequestHeader("Authorization") String tokenHeader, @RequestParam(required=false) String query) {
-		var status = auth(tokenHeader, AccessLevel.Operator);
+		var status = auth(tokenHeader, AccessLevel.Storekeeper);
 		if (status != null) {
 			return status;
 		}
@@ -40,7 +40,7 @@ public class EmployeeController extends AuthorizedController {
 
 	@PutMapping
 	public ResponseEntity<?> save(@RequestHeader("Authorization") String tokenHeader, @RequestBody Employee employee) {
-		var status = auth(tokenHeader, AccessLevel.Operator);
+		var status = auth(tokenHeader, AccessLevel.Storekeeper);
 		if (status != null) {
 			return status;
 		}
@@ -59,7 +59,7 @@ public class EmployeeController extends AuthorizedController {
 	
 	@DeleteMapping("{id}")
 	public ResponseEntity<?> delete(@RequestHeader("Authorization") String tokenHeader, @PathVariable String id) {
-		var status = auth(tokenHeader, AccessLevel.Operator);
+		var status = auth(tokenHeader, AccessLevel.Storekeeper);
 		if (status != null) {
 			return status;
 		}

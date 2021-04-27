@@ -1,1 +1,1 @@
-DELETE FROM "employee" WHERE "id" = ? CASCADE
+DELETE FROM "employee" WHERE "id" = ? 
