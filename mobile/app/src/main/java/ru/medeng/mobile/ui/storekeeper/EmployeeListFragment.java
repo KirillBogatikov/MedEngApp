@@ -29,6 +29,13 @@ public class EmployeeListFragment extends Fragment {
         list.setLayoutManager(new LinearLayoutManager(container.getContext()));
         invalidateList(employeeService);
 
+        root.findViewById(R.id.add).setOnClickListener(v -> {
+            EmployeeAlert alert = new EmployeeAlert(getContext(), () -> {
+                invalidateList(employeeService);
+            });
+            alert.show();
+        });
+
         return root;
     }
 

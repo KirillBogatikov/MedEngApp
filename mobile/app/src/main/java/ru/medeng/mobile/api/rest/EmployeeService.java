@@ -4,9 +4,11 @@ import java.util.List;
 import java.util.UUID;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
 import ru.medeng.models.user.Employee;
@@ -17,4 +19,7 @@ public interface EmployeeService {
 
     @DELETE("/api/employee/{id}")
     Call<Void> delete(@Header("Authorization") String token, @Path("id") UUID id);
+
+    @PUT("/api/employee")
+    Call<Void> save(@Header("Authorization") String token, @Body Employee e);
 }

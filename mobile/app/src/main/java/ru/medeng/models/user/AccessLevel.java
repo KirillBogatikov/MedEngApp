@@ -15,4 +15,14 @@ public enum AccessLevel {
 	public int getCode() {
 		return i;
 	}
+
+	public static AccessLevel forCode(int i) {
+		for (AccessLevel a : values()) {
+			if (a.getCode() == i) {
+				return a;
+			}
+		}
+
+		return null;
+	}
 }

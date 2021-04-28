@@ -60,4 +60,22 @@ public class EmployeeServiceImpl {
             return false;
         });
     }
+
+    public boolean save(Employee employee) {
+        return thread.await(() -> {
+            try {
+                Call<Void> call = employees.save(auth.getToken(), employee);
+                Response<Void> resp = call.execute();
+                if (resp.code() == 200) {
+                    return true;
+                }
+
+                Log.d(TAG, "Unexpected status: " + resp.code());
+            } catch(Exception e) {
+                Log.d(TAG, "Failed to delete employee", e);
+            }
+
+            return false;
+        });
+    }
 }

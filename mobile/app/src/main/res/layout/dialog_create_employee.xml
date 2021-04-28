@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="35dp"
+    android:paddingBottom="0dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/login_label"
+        android:textSize="@dimen/edit_text_hint_text" />
+    <EditText
+        android:id="@+id/login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/edit_text_divider"
+        android:autofillHints=""
+        android:hint="@string/login_label"
+        android:inputType="text"
+        android:textSize="@dimen/edit_text_value" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/password_label"
+        android:textSize="@dimen/edit_text_hint_text" />
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/edit_text_divider"
+        android:autofillHints=""
+        android:hint="@string/password_label"
+        android:inputType="textPassword"
+        android:textSize="@dimen/edit_text_value" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/role_label"
+        android:textSize="@dimen/edit_text_hint_text" />
+    <Spinner
+        android:id="@+id/role"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/employee_role"/>
+
+</LinearLayout>
